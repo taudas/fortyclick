@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Forty Click',
       theme: ThemeData(
+              primaryColor: Color(0xff00ff00),
               primarySwatch: Colors.green,
       ),
       home: MyHomePage(title: 'Forty Click - Some Say This is Relaxing'),
@@ -76,30 +77,33 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
      return Container(
         decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/relax.webp'), fit: BoxFit.cover)),
+        image: DecorationImage( image: AssetImage('assets/relax.webp'), fit: BoxFit.cover)),
       child: Scaffold(
+          backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text('Some Say these Sounds are Relaxing'),
+          centerTitle: true,
+          title: FittedBox(fit:BoxFit.fitWidth,
+              child: Text(('Some Say these Sounds are Relaxing'))
+          ),
         ),
         body: ListView(
           children: [
             localAsset(),
             Html( data: '<hr>'),
-            new InkWell(
-                child: new Text('Does listening to a 40 Hz tone “clean up” the brain in Alzheimer’s patients?',
-                style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.blue)),
-                onTap: () => launch('https://blog.szynalski.com/2018/03/40-hz-tone-alzheimers/')
-            ),
-            new InkWell(
-                child: new Text('Gamma wave - Wikipedia',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue)),
-                onTap: () => launch('https://en.wikipedia.org/wiki/Gamma_wave')
-            ),
+//            new InkWell(
+//                child: new Text('Does listening to a 40 Hz tone “clean up” the brain in Alzheimer’s patients?',
+//                style: TextStyle(
+//                fontWeight: FontWeight.bold,
+//                color: Colors.black)),
+//                onTap: () => launch('https://blog.szynalski.com/2018/03/40-hz-tone-alzheimers/')
+//            ),
+//            new InkWell(
+//                child: new Text('Gamma wave - Wikipedia',
+//                    style: TextStyle(
+//                        fontWeight: FontWeight.bold,
+//                        color: Colors.black)),
+//                onTap: () => launch('https://en.wikipedia.org/wiki/Gamma_wave')
+//            ),
             Html( data: '<hr>'),
             AdmobBanner(
             adUnitId: getBannerAdUnitId(),
