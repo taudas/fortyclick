@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:admob_flutter/admob_flutter.dart';
-
+import 'package:flutter_html/flutter_html.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   Admob.initialize(getAppId());
@@ -11,7 +12,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -36,21 +35,17 @@ class _MyHomePageState extends State<MyHomePage> {
   AudioPlayer advancedPlayer;
   AudioCache audioCache;
   AdmobBannerSize bannerSize;
-
-
   @override
   void initState(){
     super.initState();
     initPlayer();
     bannerSize = AdmobBannerSize.MEDIUM_RECTANGLE;
-
   }
   void initPlayer(){
     advancedPlayer = new AudioPlayer();
     audioCache = new AudioCache(fixedPlayer: advancedPlayer);
   }
   String localFilePath;
-
   Widget _tab(List<Widget> children) {
     return Center(
       child: Container(
@@ -63,95 +58,55 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
   Widget _btn(String txt, VoidCallback onPressed) {
     return ButtonTheme(
         minWidth: 48.0,
         child: RaisedButton(child: Text(txt), onPressed: onPressed));
   }
-
-
-
   Widget localAsset() {
     return _tab([
-      Text('Play 40Hz Click'),
-      _btn('Play', () => audioCache.loop('audio.mp3')),
+//      Text('Play 40Hz Click'),
+      _btn('Play 40Hz Click', () => audioCache.loop('audio2.mp3')),
+//      Text('Play 40Hz Sound'),
+      _btn('Play 40Hz Sound', () => audioCache.loop('audio.mp3')),
       _btn('Stop', () => advancedPlayer.stop()),
     ]);
   }
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-//    return Scaffold(
-//      appBar: AppBar(
-//        // Here we take the value from the MyHomePage object that was created by
-//        // the App.build method, and use it to set our appbar title.
-//        title: Text(widget.title),
-//      ),
-//      body: Center(
-//        // Center is a layout widget. It takes a single child and positions it
-//        // in the middle of the parent.
-//        child: Column(
-//          // Column is also layout widget. It takes a list of children and
-//          // arranges them vertically. By default, it sizes itself to fit its
-//          // children horizontally, and tries to be as tall as its parent.
-//          //
-//          // Invoke "debug painting" (press "p" in the console, choose the
-//          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-//          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-//          // to see the wireframe for each widget.
-//          //
-//          // Column has various properties to control how it sizes itself and
-//          // how it positions its children. Here we use mainAxisAlignment to
-//          // center the children vertically; the main axis here is the vertical
-//          // axis because Columns are vertical (the cross axis would be
-//          // horizontal).
-//          mainAxisAlignment: MainAxisAlignment.center,
-//
-//          children: <Widget>[
-//            Text(
-//              'You may have pushed the button this many times:',
-//            ),
-//            Text(
-//              '$_counter',
-//              style: Theme.of(context).textTheme.display1,
-//            ),
-//          ],
-//        ),
-//      ),
-//      floatingActionButton: FloatingActionButton(
-//        onPressed: _incrementCounter,
-//        tooltip: 'Increment',
-//        child: Icon(Icons.add),
-//      ), // This trailing comma makes auto-formatting nicer for build methods.
-    return DefaultTabController(
-      length: 1,
-      child: Container(
-          decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("relax.png"), fit: BoxFit.cover)),
+     return Container(
+        decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/relax.webp'), fit: BoxFit.cover)),
       child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              tabs: [
-                Tab(text: 'Some Say this Sound is Relaxing'),
-              ],
+        appBar: AppBar(
+          title: Text('Some Say these Sounds are Relaxing'),
+        ),
+        body: ListView(
+          children: [
+            localAsset(),
+            Html( data: '<hr>'),
+            new InkWell(
+                child: new Text('Does listening to a 40 Hz tone “clean up” the brain in Alzheimer’s patients?',
+                style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.blue)),
+                onTap: () => launch('https://blog.szynalski.com/2018/03/40-hz-tone-alzheimers/')
             ),
-            title: Text('Forty Click'),
-          ),
-          body: ListView(
-            children: [localAsset(),
-              AdmobBanner(
-              adUnitId: getBannerAdUnitId(),
-              adSize: bannerSize,
-      )],
+            new InkWell(
+                child: new Text('Gamma wave - Wikipedia',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue)),
+                onTap: () => launch('https://en.wikipedia.org/wiki/Gamma_wave')
+            ),
+            Html( data: '<hr>'),
+            AdmobBanner(
+            adUnitId: getBannerAdUnitId(),
+            adSize: bannerSize,
+    )],
 
-      ))));
+    )));
   }
 }
 String getAppId() {
