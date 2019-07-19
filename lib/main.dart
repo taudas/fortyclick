@@ -90,20 +90,30 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             localAsset(),
             Html( data: '<hr>'),
-//            new InkWell(
-//                child: new Text('Does listening to a 40 Hz tone “clean up” the brain in Alzheimer’s patients?',
-//                style: TextStyle(
-//                fontWeight: FontWeight.bold,
-//                color: Colors.black)),
-//                onTap: () => launch('https://blog.szynalski.com/2018/03/40-hz-tone-alzheimers/')
-//            ),
-//            new InkWell(
-//                child: new Text('Gamma wave - Wikipedia',
-//                    style: TextStyle(
-//                        fontWeight: FontWeight.bold,
-//                        color: Colors.black)),
-//                onTap: () => launch('https://en.wikipedia.org/wiki/Gamma_wave')
-//            ),
+            new InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: new Text('Does listening to a 40 Hz tone “clean up” the brain in Alzheimer’s patients?',
+                  style: TextStyle(
+                  //fontWeight: FontWeight.bold,
+                      backgroundColor: Colors.grey,
+                      decoration: TextDecoration.underline,
+                  color: Colors.black)),
+                ),
+                onTap: () => launch('https://blog.szynalski.com/2018/03/40-hz-tone-alzheimers/')
+            ),
+            new InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: new Text('Gamma wave - Wikipedia',
+                      style: TextStyle(
+                         // fontWeight: FontWeight.bold,
+                          backgroundColor: Colors.grey,
+                          decoration: TextDecoration.underline,
+                          color: Colors.black)),
+                ),
+                onTap: () => launch('https://en.wikipedia.org/wiki/Gamma_wave')
+            ),
             Html( data: '<hr>'),
             AdmobBanner(
             adUnitId: getBannerAdUnitId(),
