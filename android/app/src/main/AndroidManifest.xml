@@ -33,5 +33,9 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-4436272376536757~7379690244"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="21ab4e4e47fc34b089b87dbed6d463d069027ef4" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

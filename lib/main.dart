@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Forty Click',
       theme: ThemeData(
-              primaryColor: Color(0xff00ff00),
               primarySwatch: Colors.green,
       ),
       home: MyHomePage(title: 'Forty Click - Some Say This is Relaxing'),
@@ -51,10 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return Center(
       child: Container(
         padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: children
-              .map((w) => Container(child: w, padding: EdgeInsets.all(6.0)))
-              .toList(),
+        child: Center(
+          child: Row(
+            children: children
+                .map((w) => Center(child: Container(child: w, padding: EdgeInsets.all(6.0))))
+                .toList(),
+          ),
         ),
       ),
     );
@@ -65,13 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: RaisedButton(child: Text(txt), onPressed: onPressed));
   }
   Widget localAsset() {
-    return _tab([
-//      Text('Play 40Hz Click'),
-      _btn('Play 40Hz Click', () => audioCache.loop('audio2.mp3')),
-//      Text('Play 40Hz Sound'),
-      _btn('Play 40Hz Sound', () => audioCache.loop('audio.mp3')),
-      _btn('Stop', () => advancedPlayer.stop()),
-    ]);
+    return Center(
+      child: _tab([
+        _btn('Play 1', () => audioCache.loop('audio.mp3')),
+        _btn('Play 2', () => audioCache.loop('audio2.mp3')),
+        _btn('Stop', () => advancedPlayer.stop()),
+      ]),
+    );
   }
   @override
   Widget build(BuildContext context) {
@@ -86,43 +87,38 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(('Some Say these Sounds are Relaxing'))
           ),
         ),
-        body: ListView(
-          children: [
-            localAsset(),
-            Html( data: '<hr>'),
-            new InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: new Text('Does listening to a 40 Hz tone “clean up” the brain in Alzheimer’s patients?',
-                  style: TextStyle(
-                  //fontWeight: FontWeight.bold,
-                      backgroundColor: Colors.grey,
-                      decoration: TextDecoration.underline,
-                  color: Colors.black)),
-                ),
-                onTap: () => launch('https://blog.szynalski.com/2018/03/40-hz-tone-alzheimers/')
-            ),
-            new InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: new Text('Gamma wave - Wikipedia',
-                      style: TextStyle(
-                         // fontWeight: FontWeight.bold,
-                          backgroundColor: Colors.grey,
-                          decoration: TextDecoration.underline,
-                          color: Colors.black)),
-                ),
-                onTap: () => launch('https://en.wikipedia.org/wiki/Gamma_wave')
-            ),
-            Html( data: '<hr>'),
-            AdmobBanner(
-            adUnitId: getBannerAdUnitId(),
-            adSize: bannerSize,
-    )],
-
-    )));
+          body: ListView(
+            children: [
+              Center(child: localAsset()),
+              //Html( data: '<hr>'),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: _btn('Does listening to a 40 Hz tone “clean up” the brain in Alzheimer’s patients?',
+                        () => launch('https://blog.szynalski.com/2018/03/40-hz-tone-alzheimers/')),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: _btn('Gamma wave - Wikipedia',
+                        () => launch('https://en.wikipedia.org/wiki/Gamma_wave')),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: _btn(
+                    'Gamma Band Neural Stimulation in Humans and the Promise of a New Modality to Prevent and Treat Alzheimer’s Disease',
+                    () => launch('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6130417/')),
+              ),
+              // Html( data: '<hr>'),
+              AdmobBanner(
+                adUnitId: getBannerAdUnitId(),
+                adSize: bannerSize,
+              ),
+            ],
+          )
+      )
+     );
   }
 }
+
 String getAppId() {
   if (Platform.isIOS) {
     return 'ca-app-pub-4436272376536757~7379690244';
