@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Forty Click',
       theme: ThemeData(
-              primarySwatch: Colors.green,
+        brightness: Brightness.dark,
+        primarySwatch: Colors.lightGreen,
       ),
       home: MyHomePage(title: 'Forty Click - Some Say This is Relaxing'),
     );
@@ -39,7 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState(){
     super.initState();
     initPlayer();
-    bannerSize = AdmobBannerSize.MEDIUM_RECTANGLE;
+    bannerSize = AdmobBannerSize.BANNER;
+//    bannerSize = AdmobBannerSize.MEDIUM_RECTANGLE;
+
   }
   void initPlayer(){
     advancedPlayer = new AudioPlayer();
@@ -63,7 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _btn(String txt, VoidCallback onPressed) {
     return ButtonTheme(
         minWidth: 48.0,
-        child: RaisedButton(child: Text(txt), onPressed: onPressed));
+        splashColor: Colors.lightGreenAccent,
+        child: RaisedButton(child: Text(txt),
+            highlightElevation: 2,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)
+            ),
+            onPressed: onPressed));
   }
   Widget localAsset() {
     return Center(
@@ -101,17 +110,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: _btn('Gamma wave - Wikipedia',
                         () => launch('https://en.wikipedia.org/wiki/Gamma_wave')),
               ),
+              AdmobBanner(
+                adUnitId: getBannerAdUnitId(),
+                adSize: bannerSize,
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: _btn(
                     'Gamma Band Neural Stimulation in Humans and the Promise of a New Modality to Prevent and Treat Alzheimer’s Disease',
                     () => launch('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6130417/')),
               ),
-              // Html( data: '<hr>'),
-              AdmobBanner(
-                adUnitId: getBannerAdUnitId(),
-                adSize: bannerSize,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: _btn('Science Direct - Gamma Wave',
+                        () => launch('https://www.sciencedirect.com/topics/neuroscience/gamma-wave')),
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                 child: _btn('What is the function of the various brainwaves?',
+                 () => launch('https://www.scientificamerican.com/article/what-is-the-function-of-t-1997-12-22/')),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: _btn('Flash! Beep! Gamma Waves Stimulate Microglia, Memory',
+                        () => launch('https://www.alzforum.org/news/research-news/flash-beep-gamma-waves-stimulate-microglia-memory')),
+              ),
+              // Html( data: '<hr>'),
             ],
           )
       )

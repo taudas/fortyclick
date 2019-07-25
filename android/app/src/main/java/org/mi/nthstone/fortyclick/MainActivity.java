@@ -3,6 +3,7 @@ package org.mi.nthstone.fortyclick;
 import android.os.Bundle;
 
 import com.crashlytics.android.Crashlytics;
+
 import io.fabric.sdk.android.Fabric;
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugins.GeneratedPluginRegistrant;
