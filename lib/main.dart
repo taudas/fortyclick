@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Forty Click',
       theme: ThemeData(
-        brightness: Brightness.dark,
         primarySwatch: Colors.lightGreen,
       ),
       home: MyHomePage(title: 'Forty Click - Some Say This is Relaxing'),
