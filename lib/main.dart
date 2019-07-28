@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Container(
         padding: EdgeInsets.all(16.0),
         child: Center(
-          child: Row(
+          child: Column(
             children: children
                 .map((w) => Center(child: Container(child: w, padding: EdgeInsets.all(6.0))))
                 .toList(),
