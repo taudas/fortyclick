@@ -19,6 +19,6 @@ steps:
     version: 'latest'
 
 - task: FlutterBuild@0
-    inputs:
-      target: 'apk'
-      projectDirectory: '.'
+  inputs:
+    target: 'apk'
+    projectDirectory: '.'
