@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:admob_flutter/admob_flutter.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -48,37 +47,47 @@ class _MyHomePageState extends State<MyHomePage> {
     audioCache = new AudioCache(fixedPlayer: advancedPlayer);
   }
   String localFilePath;
-  Widget _tab(List<Widget> children) {
+  Widget myTable(List<Widget> children) {
     return Center(
       child: Container(
-        padding: EdgeInsets.all(16.0),
-        child: Center(
-          child: Column(
+        padding: EdgeInsets.all(2.0),
+//        child: Center(
+          child: Row(
+
             children: children
-                .map((w) => Center(child: Container(child: w, padding: EdgeInsets.all(6.0))))
+                .map((w) => Center(child: Container(child: w, padding: EdgeInsets.all(2.0))))
                 .toList(),
           ),
-        ),
+//        ),
       ),
     );
   }
-  Widget _btn(String txt, VoidCallback onPressed) {
+  Widget myButton(String txt, VoidCallback onPressed) {
     return ButtonTheme(
         minWidth: 48.0,
         splashColor: Colors.lightGreenAccent,
-        child: RaisedButton(child: Text(txt),
+        child: RaisedButton(
+            onPressed: onPressed,
             highlightElevation: 2,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10)
-            ),
-            onPressed: onPressed));
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+//            child: Container(
+//            decoration: BoxDecoration(
+//              image: DecorationImage(
+//                  image: AssetImage('assets/grass.webp'),
+//                  fit: BoxFit.contain
+//                  ),
+            child: Text(txt)
+        ),
+        );
   }
   Widget localAsset() {
     return Center(
-      child: _tab([
-        _btn('Play 1', () => audioCache.loop('audio.mp3')),
-        _btn('Play 2', () => audioCache.loop('audio2.mp3')),
-        _btn('Stop', () => advancedPlayer.stop()),
+      child: myTable([
+        myButton('Play 1', () => audioCache.loop('audio1.mp3')),
+        myButton('Play 2', () => audioCache.loop('audio2.mp3')),
+        myButton('Play 3', () => audioCache.loop('audio3.mp3')),
+        myButton('Play 4', () => audioCache.loop('audio72.mp3')),
+        myButton('Stop', () => advancedPlayer.stop()),
       ]),
     );
   }
@@ -86,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
      return Container(
         decoration: BoxDecoration(
-        image: DecorationImage( image: AssetImage('assets/relax.webp'), fit: BoxFit.cover)),
+        image: DecorationImage( image: AssetImage('assets/jurrasic.jpg'), fit: BoxFit.cover)),
       child: Scaffold(
           backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -101,12 +110,12 @@ class _MyHomePageState extends State<MyHomePage> {
               //Html( data: '<hr>'),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: _btn('Does listening to a 40 Hz tone “clean up” the brain in Alzheimer’s patients?',
+                child: myButton('Does listening to a 40 Hz tone “clean up” the brain in Alzheimer’s patients?',
                         () => launch('https://blog.szynalski.com/2018/03/40-hz-tone-alzheimers/')),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: _btn('Gamma wave - Wikipedia',
+                child: myButton('Gamma wave - Wikipedia',
                         () => launch('https://en.wikipedia.org/wiki/Gamma_wave')),
               ),
               AdmobBanner(
@@ -115,23 +124,23 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: _btn(
+                child: myButton(
                     'Gamma Band Neural Stimulation in Humans and the Promise of a New Modality to Prevent and Treat Alzheimer’s Disease',
                     () => launch('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6130417/')),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: _btn('Science Direct - Gamma Wave',
+                child: myButton('Science Direct - Gamma Wave',
                         () => launch('https://www.sciencedirect.com/topics/neuroscience/gamma-wave')),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                 child: _btn('What is the function of the various brainwaves?',
+                 child: myButton('What is the function of the various brainwaves?',
                  () => launch('https://www.scientificamerican.com/article/what-is-the-function-of-t-1997-12-22/')),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: _btn('Flash! Beep! Gamma Waves Stimulate Microglia, Memory',
+                child: myButton('Flash! Beep! Gamma Waves Stimulate Microglia, Memory',
                         () => launch('https://www.alzforum.org/news/research-news/flash-beep-gamma-waves-stimulate-microglia-memory')),
               ),
               // Html( data: '<hr>'),
