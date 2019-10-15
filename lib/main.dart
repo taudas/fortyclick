@@ -91,12 +91,34 @@ class _MyHomePageState extends State<MyHomePage> {
       ]),
     );
   }
+
+  
   @override
   Widget build(BuildContext context) {
-     return Container(
-        decoration: BoxDecoration(
-        image: DecorationImage( image: AssetImage('assets/jurrasic.jpg'), fit: BoxFit.cover)),
-      child: Scaffold(
+    var splashImage = new DecoratedBox(
+        decoration: new BoxDecoration( image: DecorationImage (
+                image: new AssetImage('assets/jurrasic.png'))));
+
+    var splashStart = new DecoratedBox(
+        decoration: new BoxDecoration( image: DecorationImage(
+                image:  AssetImage('assets/grass.png'))));
+
+     return Stack(
+       children: <Widget>[
+         AnimatedCrossFade(
+         firstChild: splashImage,
+         secondChild: splashStart,
+         duration: new Duration(seconds: 1),
+            crossFadeState: CrossFadeState.showFirst),
+
+      // child: Container(
+       //  decoration:  BoxDecoration( image: splashStart)
+
+ //       decoration: BoxDecoration(
+ //       image: DecorationImage( image: AssetImage('assets/jurrasic.jpg'), fit: BoxFit.cover)
+        //  ),
+
+        Scaffold(
           backgroundColor: Colors.transparent,
         appBar: AppBar(
           centerTitle: true,
@@ -146,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
               // Html( data: '<hr>'),
             ],
           )
-      )
+      )]
      );
   }
 }
