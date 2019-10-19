@@ -10,6 +10,16 @@ void main() {
   runApp(MyApp());
 }
 
+String getAppId() {
+  if (Platform.isIOS) {
+  return 'ca-app-pub-4436272376536757~7379690244';
+} else if (Platform.isAndroid) {
+  return 'ca-app-pub-4436272376536757~7379690244';
+}
+return null;
+}
+
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -183,15 +193,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-
-  String getAppId() {
-    if (Platform.isIOS) {
-      return 'ca-app-pub-4436272376536757~7379690244';
-    } else if (Platform.isAndroid) {
-      return 'ca-app-pub-4436272376536757~7379690244';
-    }
-    return null;
-  }
 
   String getBannerAdUnitId() {
     if (Platform.isIOS) {
