@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    bool firstStateEnabled = true;
+    bool firstStateEnabled = false;
     return Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
