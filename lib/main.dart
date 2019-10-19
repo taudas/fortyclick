@@ -44,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   AudioPlayer advancedPlayer;
   AudioCache audioCache;
   AdmobBannerSize bannerSize;
+
   @override
   void initState() {
     super.initState();
@@ -56,6 +57,8 @@ class _MyHomePageState extends State<MyHomePage> {
     audioCache = new AudioCache(fixedPlayer: advancedPlayer);
   }
  String localFilePath;
+  bool firstStateEnabled = true;
+
   Widget myTable(List<Widget> children) {
     return Center(
       child: Container(
@@ -99,6 +102,8 @@ class _MyHomePageState extends State<MyHomePage> {
         myButton('Play 3',() => audioCache.loop('audio3.mp3')),
         myButton('Play 4',() => audioCache.loop('audio4.mp3')),
         myButton('Stop',() => advancedPlayer.stop()),
+//        myButton('change',() => firstStateEnabled = !firstStateEnabled),
+
       ]),
     );
   }
@@ -106,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    bool firstStateEnabled = false;
+//    firstStateEnabled = !firstStateEnabled;
     return Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -120,10 +125,10 @@ class _MyHomePageState extends State<MyHomePage> {
               AnimatedCrossFade(
                 firstChild: Container(
                     decoration: new BoxDecoration(image: DecorationImage(
-                        image: new AssetImage('assets/jurrasic.webp')))),
+                        image: new AssetImage('assets/jurrasic.webp'), fit: BoxFit.cover))),
                 secondChild: Container(
                     decoration: new BoxDecoration(image: DecorationImage(
-                        image: AssetImage('assets/grass.webp')))),
+                        image: AssetImage('assets/grass.webp'), fit: BoxFit.cover))),
                 duration: new Duration(seconds: 1),
                 crossFadeState: firstStateEnabled
                     ? CrossFadeState.showFirst : CrossFadeState.showSecond,
