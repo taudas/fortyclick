@@ -15,7 +15,7 @@ steps:
 
 - task: FlutterInstall@0
   inputs:
-    channel: 'stable'
+    channel: 'master'
     version: 'latest'
 
 - task: FlutterBuild@0
