@@ -123,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         image: new AssetImage('assets/jurrasic.webp')))),
                 secondChild: Container(
                     decoration: new BoxDecoration(image: DecorationImage(
-                        image: AssetImage('assets/relax.webp')))),
+                        image: AssetImage('assets/grass.webp')))),
                 duration: new Duration(seconds: 1),
                 crossFadeState: firstStateEnabled
                     ? CrossFadeState.showFirst : CrossFadeState.showSecond,
