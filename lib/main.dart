@@ -35,160 +35,171 @@ class _MyHomePageState extends State<MyHomePage> {
   AudioCache audioCache;
   AdmobBannerSize bannerSize;
   @override
-  void initState(){
+  void initState() {
     super.initState();
     initPlayer();
-    bannerSize = AdmobBannerSize.BANNER;
-//    bannerSize = AdmobBannerSize.MEDIUM_RECTANGLE;
-
+//    bannerSize = AdmobBannerSize.BANNER;
+    bannerSize = AdmobBannerSize.MEDIUM_RECTANGLE;
   }
-  void initPlayer(){
+  void initPlayer() {
     advancedPlayer = new AudioPlayer();
     audioCache = new AudioCache(fixedPlayer: advancedPlayer);
   }
-  String localFilePath;
+ String localFilePath;
   Widget myTable(List<Widget> children) {
     return Center(
       child: Container(
         padding: EdgeInsets.all(2.0),
 //        child: Center(
-          child: Row(
-
-            children: children
-                .map((w) => Center(child: Container(child: w, padding: EdgeInsets.all(2.0))))
-                .toList(),
-          ),
+        child: Row(
+          children: children
+              .map((w) =>
+              Center(child: Container(child: w,padding: EdgeInsets.all(2.0))))
+              .toList(),
+        ),
 //        ),
       ),
     );
   }
-  Widget myButton(String txt, VoidCallback onPressed) {
+  Widget myButton(String txt,VoidCallback onPressed) {
     return ButtonTheme(
-        minWidth: 48.0,
-        splashColor: Colors.lightGreenAccent,
-        child: RaisedButton(
-            onPressed: onPressed,
-            highlightElevation: 2,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      minWidth: 48.0,
+      splashColor: Colors.lightGreenAccent,
+      child: RaisedButton(
+          onPressed: onPressed,
+          highlightElevation: 2,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10)),
 //            child: Container(
 //            decoration: BoxDecoration(
 //              image: DecorationImage(
 //                  image: AssetImage('assets/grass.webp'),
 //                  fit: BoxFit.contain
 //                  ),
-            child: Text(txt)
-        ),
-        );
+          child: Text(txt)
+      ),
+    );
   }
-  Widget localAsset() {
+
+  Widget playerBar() {
     return Center(
       child: myTable([
-        myButton('Play 1', () => audioCache.loop('audio1.mp3')),
-        myButton('Play 2', () => audioCache.loop('audio2.mp3')),
-        myButton('Play 3', () => audioCache.loop('audio3.mp3')),
-        myButton('Play 4', () => audioCache.loop('audio72.mp3')),
-        myButton('Stop', () => advancedPlayer.stop()),
+        myButton('Play 1',() => audioCache.loop('audio1.mp3')),
+        myButton('Play 2',() => audioCache.loop('audio2.mp3')),
+        myButton('Play 3',() => audioCache.loop('audio3.mp3')),
+        myButton('Play 4',() => audioCache.loop('audio72.mp3')),
+        myButton('Stop',() => advancedPlayer.stop()),
       ]),
     );
   }
 
-  
+
   @override
   Widget build(BuildContext context) {
-    var splashImage = new DecoratedBox(
-        decoration: new BoxDecoration( image: DecorationImage (
-                image: new AssetImage('assets/jurrasic.png'))));
-
-    var splashStart = new DecoratedBox(
-        decoration: new BoxDecoration( image: DecorationImage(
-                image:  AssetImage('assets/grass.png'))));
-
-     return Stack(
-       children: <Widget>[
-         AnimatedCrossFade(
-         firstChild: splashImage,
-         secondChild: splashStart,
-         duration: new Duration(seconds: 1),
-            crossFadeState: CrossFadeState.showFirst),
-
-      // child: Container(
-       //  decoration:  BoxDecoration( image: splashStart)
-
- //       decoration: BoxDecoration(
- //       image: DecorationImage( image: AssetImage('assets/jurrasic.jpg'), fit: BoxFit.cover)
-        //  ),
-
-        Scaffold(
-          backgroundColor: Colors.transparent,
+    bool firstStateEnabled = true;
+    return Scaffold(
+        backgroundColor: Colors.transparent,
         appBar: AppBar(
           centerTitle: true,
-          title: FittedBox(fit:BoxFit.fitWidth,
+          title: FittedBox(fit: BoxFit.fitWidth,
               child: Text(('Some Say these Sounds are Relaxing'))
           ),
         ),
-          body: ListView(
-            children: [
-              Center(child: localAsset()),
-              //Html( data: '<hr>'),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: myButton('Does listening to a 40 Hz tone “clean up” the brain in Alzheimer’s patients?',
-                        () => launch('https://blog.szynalski.com/2018/03/40-hz-tone-alzheimers/')),
+        body: Stack(
+            children: <Widget>[
+              AnimatedCrossFade(
+                firstChild: Container(
+                    decoration: new BoxDecoration(image: DecorationImage(
+                        image: new AssetImage('assets/jurrasic.webp')))),
+                secondChild: Container(
+                    decoration: new BoxDecoration(image: DecorationImage(
+                        image: AssetImage('assets/relax.webp')))),
+                duration: new Duration(seconds: 1),
+                crossFadeState: firstStateEnabled
+                    ? CrossFadeState.showFirst : CrossFadeState.showSecond,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: myButton('Gamma wave - Wikipedia',
-                        () => launch('https://en.wikipedia.org/wiki/Gamma_wave')),
-              ),
-              AdmobBanner(
-                adUnitId: getBannerAdUnitId(),
-                adSize: bannerSize,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: myButton(
-                    'Gamma Band Neural Stimulation in Humans and the Promise of a New Modality to Prevent and Treat Alzheimer’s Disease',
-                    () => launch('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6130417/')),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: myButton('Science Direct - Gamma Wave',
-                        () => launch('https://www.sciencedirect.com/topics/neuroscience/gamma-wave')),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                 child: myButton('What is the function of the various brainwaves?',
-                 () => launch('https://www.scientificamerican.com/article/what-is-the-function-of-t-1997-12-22/')),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: myButton('Flash! Beep! Gamma Waves Stimulate Microglia, Memory',
-                        () => launch('https://www.alzforum.org/news/research-news/flash-beep-gamma-waves-stimulate-microglia-memory')),
-              ),
-              // Html( data: '<hr>'),
-            ],
-          )
-      )]
-     );
+              ListView(
+                children: [
+                  Center(child: playerBar()),
+                  //Html( data: '<hr>'),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: myButton(
+                        'Does listening to a 40 Hz tone “clean up” the brain in Alzheimer’s patients?',
+                            () =>
+                            launch(
+                                'https://blog.szynalski.com/2018/03/40-hz-tone-alzheimers/')),
+                    //  crossFadeState: CrossFadeState.showSecond
+                    // firstStateEnabled = false;
+
+
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: myButton('Gamma wave - Wikipedia',
+                            () =>
+                            launch('https://en.wikipedia.org/wiki/Gamma_wave')),
+                  ),
+                  AdmobBanner(
+                    adUnitId: getBannerAdUnitId(),
+                    adSize: bannerSize,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: myButton(
+                        'Gamma Band Neural Stimulation in Humans and the Promise of a New Modality to Prevent and Treat Alzheimer’s Disease',
+                            () =>
+                            launch(
+                                'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6130417/')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: myButton('Science Direct - Gamma Wave',
+                            () =>
+                            launch(
+                                'https://www.sciencedirect.com/topics/neuroscience/gamma-wave')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: myButton(
+                        'What is the function of the various brainwaves?',
+                            () =>
+                            launch(
+                                'https://www.scientificamerican.com/article/what-is-the-function-of-t-1997-12-22/')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: myButton(
+                        'Flash! Beep! Gamma Waves Stimulate Microglia, Memory',
+                            () =>
+                            launch(
+                                'https://www.alzforum.org/news/research-news/flash-beep-gamma-waves-stimulate-microglia-memory')),
+                  ),
+                  // Html( data: '<hr>'),
+                ],
+              )
+//      )
+            ])
+    );
+  }
+
+
+  String getAppId() {
+    if (Platform.isIOS) {
+      return 'ca-app-pub-4436272376536757~7379690244';
+    } else if (Platform.isAndroid) {
+      return 'ca-app-pub-4436272376536757~7379690244';
+    }
+    return null;
+  }
+
+  String getBannerAdUnitId() {
+    if (Platform.isIOS) {
+      return 'ca-app-pub-4436272376536757/5875036884';
+    } else if (Platform.isAndroid) {
+      return 'ca-app-pub-4436272376536757/5875036884';
+    }
+    return null;
   }
 }
-
-String getAppId() {
-  if (Platform.isIOS) {
-    return 'ca-app-pub-4436272376536757~7379690244';
-  } else if (Platform.isAndroid) {
-    return 'ca-app-pub-4436272376536757~7379690244';
-  }
-  return null;
-}
-
-String getBannerAdUnitId() {
-  if (Platform.isIOS) {
-    return 'ca-app-pub-4436272376536757/5875036884';
-  } else if (Platform.isAndroid) {
-    return 'ca-app-pub-4436272376536757/5875036884';
-  }
-  return null;
-}
-
 //\n<a href="https://www.ncbi.nlm.nih.gov/pubmed/18818122">https://www.ncbi.nlm.nih.gov/pubmed/18818122
