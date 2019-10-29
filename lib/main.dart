@@ -4,12 +4,10 @@ import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 void main() {
   Admob.initialize(getAppId());
   runApp(MyApp());
 }
-
 String getAppId() {
   if (Platform.isIOS) {
   return 'ca-app-pub-4436272376536757~7379690244';
@@ -18,8 +16,6 @@ String getAppId() {
 }
 return null;
 }
-
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -32,33 +28,29 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
-
 class _MyHomePageState extends State<MyHomePage> {
   AudioPlayer advancedPlayer;
   AudioCache audioCache;
   AdmobBannerSize bannerSize;
-
   @override
   void initState() {
     super.initState();
     initPlayer();
-//    bannerSize = AdmobBannerSize.BANNER;
-    bannerSize = AdmobBannerSize.MEDIUM_RECTANGLE;
+    bannerSize = AdmobBannerSize.BANNER;
+    //bannerSize = AdmobBannerSize.MEDIUM_RECTANGLE;
   }
   void initPlayer() {
     advancedPlayer = new AudioPlayer();
     audioCache = new AudioCache(fixedPlayer: advancedPlayer);
   }
- String localFilePath;
+  String localFilePath;
   bool firstStateEnabled = true;
-
   Widget myTable(List<Widget> children) {
     return Center(
       child: Container(
@@ -93,22 +85,21 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
   Widget playerBar() {
     return Center(
       child: myTable([
         myButton('Play 1',() => audioCache.loop('audio1.mp3')),
         myButton('Play 2',() => audioCache.loop('audio2.mp3')),
-        myButton('Play 3',() => audioCache.loop('audio3.mp3')),
+      //  myButton('Play 3',() => audioCache.loop('audio3.mp3')),
         myButton('Play 4',() => audioCache.loop('audio4.mp3')),
         myButton('Stop',() => advancedPlayer.stop()),
-//        myButton('change',() => firstStateEnabled = !firstStateEnabled),
+        myButton('change',() => setState(() {
+          firstStateEnabled = !firstStateEnabled;
+        })  ),
 
       ]),
     );
   }
-
-
   @override
   Widget build(BuildContext context) {
 //    firstStateEnabled = !firstStateEnabled;
@@ -129,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 secondChild: Container(
                     decoration: new BoxDecoration(image: DecorationImage(
                         image: AssetImage('assets/grass.webp'), fit: BoxFit.cover))),
-                duration: new Duration(seconds: 1),
+                duration: new Duration(seconds: 9),
                 crossFadeState: firstStateEnabled
                     ? CrossFadeState.showFirst : CrossFadeState.showSecond,
               ),
