@@ -66,13 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-  Widget myButton(String txt,VoidCallback onPressed) {
+  Widget myButton(String txt, VoidCallback onPressed) {
     return ButtonTheme(
       minWidth: 48.0,
       splashColor: Colors.lightGreenAccent,
       child: RaisedButton(
           onPressed: onPressed,
-          highlightElevation: 2,
+          highlightElevation: 6,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10)),
 //            child: Container(
@@ -86,23 +86,21 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
   Widget playerBar() {
-    return Center(
+    return FittedBox(fit: BoxFit.fitWidth,
       child: myTable([
         myButton('Play 1',() => audioCache.loop('audio1.mp3')),
         myButton('Play 2',() => audioCache.loop('audio2.mp3')),
-      //  myButton('Play 3',() => audioCache.loop('audio3.mp3')),
+        myButton('Play 3',() => audioCache.loop('audio3.mp3')),
         myButton('Play 4',() => audioCache.loop('audio4.mp3')),
         myButton('Stop',() => advancedPlayer.stop()),
-        myButton('change',() => setState(() {
+        myButton('Change',() => setState(() {
           firstStateEnabled = !firstStateEnabled;
         })  ),
-
       ]),
     );
   }
   @override
   Widget build(BuildContext context) {
-//    firstStateEnabled = !firstStateEnabled;
     return Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -116,10 +114,10 @@ class _MyHomePageState extends State<MyHomePage> {
               AnimatedCrossFade(
                 firstChild: Container(
                     decoration: new BoxDecoration(image: DecorationImage(
-                        image: new AssetImage('assets/jurrasic.webp'), fit: BoxFit.cover))),
+                        image: new AssetImage('assets/jurrasic.webp'), fit: BoxFit.fill))),
                 secondChild: Container(
                     decoration: new BoxDecoration(image: DecorationImage(
-                        image: AssetImage('assets/grass.webp'), fit: BoxFit.cover))),
+                        image: AssetImage('assets/grass.webp'), fit: BoxFit.fill))),
                 duration: new Duration(seconds: 9),
                 crossFadeState: firstStateEnabled
                     ? CrossFadeState.showFirst : CrossFadeState.showSecond,
@@ -135,10 +133,6 @@ class _MyHomePageState extends State<MyHomePage> {
                             () =>
                             launch(
                                 'https://blog.szynalski.com/2018/03/40-hz-tone-alzheimers/')),
-                    //  crossFadeState: CrossFadeState.showSecond
-                    // firstStateEnabled = false;
-
-
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -181,15 +175,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             launch(
                                 'https://www.alzforum.org/news/research-news/flash-beep-gamma-waves-stimulate-microglia-memory')),
                   ),
-                  // Html( data: '<hr>'),
                 ],
               )
-//      )
             ])
     );
   }
-
-
   String getBannerAdUnitId() {
     if (Platform.isIOS) {
       return 'ca-app-pub-4436272376536757/5875036884';
@@ -199,4 +189,3 @@ class _MyHomePageState extends State<MyHomePage> {
     return null;
   }
 }
-//\n<a href="https://www.ncbi.nlm.nih.gov/pubmed/18818122">https://www.ncbi.nlm.nih.gov/pubmed/18818122
