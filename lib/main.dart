@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   Widget myButton(String txt, VoidCallback onPressed) {
     return ButtonTheme(
-      minWidth: 48.0,
+      minWidth: 32.0,
       splashColor: Colors.lightGreenAccent,
       child: RaisedButton(
           onPressed: onPressed,
@@ -88,12 +88,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget playerBar() {
     return FittedBox(fit: BoxFit.fitWidth,
       child: myTable([
-        myButton('Play 1',() => audioCache.loop('audio1.mp3')),
-        myButton('Play 2',() => audioCache.loop('audio2.mp3')),
-        myButton('Play 3',() => audioCache.loop('audio3.mp3')),
-        myButton('Play 4',() => audioCache.loop('audio4.mp3')),
+        myButton('1',() => audioCache.loop('audio1.mp3')),
+        myButton('2',() => audioCache.loop('audio2.mp3')),
+        myButton('3',() => audioCache.loop('audio3.mp3')),
+        myButton('4',() => audioCache.loop('audio4.mp3')),
         myButton('Stop',() => advancedPlayer.stop()),
         myButton('Change',() => setState(() {
+          audioCache.loop('audio1.mp3');
           firstStateEnabled = !firstStateEnabled;
         })  ),
       ]),
