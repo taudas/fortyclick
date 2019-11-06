@@ -68,11 +68,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   Widget myButton(String txt, VoidCallback onPressed) {
     return ButtonTheme(
-      minWidth: 32.0,
+      minWidth: 16.0,
       splashColor: Colors.lightGreenAccent,
       child: RaisedButton(
           onPressed: onPressed,
-          highlightElevation: 6,
+          highlightElevation: 16,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10)),
 //            child: Container(
@@ -88,15 +88,27 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget playerBar() {
     return FittedBox(fit: BoxFit.fitWidth,
       child: myTable([
-        myButton('1',() => audioCache.loop('audio1.mp3')),
-        myButton('2',() => audioCache.loop('audio2.mp3')),
-        myButton('3',() => audioCache.loop('audio3.mp3')),
-        myButton('4',() => audioCache.loop('audio4.mp3')),
-        myButton('Stop',() => advancedPlayer.stop()),
-        myButton('Change',() => setState(() {
+        myButton('1',() => setState(() {
           audioCache.loop('audio1.mp3');
           firstStateEnabled = !firstStateEnabled;
         })  ),
+        myButton('2',() => setState(() {
+          audioCache.loop('audio2.mp3');
+          firstStateEnabled = !firstStateEnabled;
+        })  ),
+        myButton('3',() => setState(() {
+          audioCache.loop('audio3.mp3');
+          firstStateEnabled = !firstStateEnabled;
+        })  ),
+        myButton('4',() => setState(() {
+          audioCache.loop('audio4.mp3');
+          firstStateEnabled = !firstStateEnabled;
+        })  ),
+        myButton('Stop',() => advancedPlayer.stop()),
+//        myButton('Change',() => setState(() {
+//          audioCache.loop('audio1.mp3');
+//          firstStateEnabled = !firstStateEnabled;
+//        })  ),
       ]),
     );
   }
