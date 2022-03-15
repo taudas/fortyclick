@@ -1,9 +1,7 @@
 buildscript {
     repositories {
-        maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.30.0'
     }
 }
 def localProperties = new Properties()
@@ -26,16 +24,29 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
+
 
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+def getVersionName = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--tags', '--dirty', '--long'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
 
+def getVersionCode = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-list', '--first-parent', '--count', 'master'
+        standardOutput = stdout
+    }
+    return Integer.parseInt(stdout.toString().trim())
+}
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
 
     lintOptions {
         disable 'InvalidPackage'
@@ -44,11 +55,11 @@ android {
     defaultConfig {
         applicationId "org.mi.nthstone.fortyclick"
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        targetSdkVersion 31
+        versionCode getVersionCode()
+        versionName getVersionName()
        // testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        setProperty("archivesBaseName", "fc-$versionCode")
+        setProperty("archivesBaseName", "fc-$versionName-$versionCode")
 
     }
 
@@ -72,6 +83,6 @@ flutter {
 }
 
 dependencies {
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+//    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
 }
