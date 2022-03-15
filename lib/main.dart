@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audio_cache.dart';
+// import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 void main() {
-  Admob.initialize(getAppId());
+  Admob.initialize();
   runApp(MyApp());
 }
 String getAppId() {
@@ -70,8 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return ButtonTheme(
       minWidth: 16.0,
       splashColor: Colors.lightGreenAccent,
-      child: Raiutton(
-          onPressed: onPressed,
+      child: RaisedButton       onPressed: onPressed,
           highlightElevation: 16,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10)),

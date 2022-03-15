@@ -4,22 +4,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.4'
-    }
-}
+        classpath "com.android.tools.build:gradle:4.2.2"
+}}
 allprojects {
     repositories {
         google()
         mavenCentral()
     }
-}
-rootProject.buildDir = '../build'
-subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
-    project.evaluationDependsOn(':app')
-}
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
