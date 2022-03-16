@@ -37,7 +37,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   AudioPlayer advancedPlayer;
   AudioCache audioCache;
-  AdmobBannerSize bannerSize;
+  // AdmobBannerSize bannerSize;
   @override
   void initState() {
     super.initState();
