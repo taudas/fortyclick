@@ -2,20 +2,20 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 // import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:admob_flutter/admob_flutter.dart';
+// import 'package:admob_flutter/admob_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 void main() {
-  Admob.initialize();
+  // Admob.initialize();
   runApp(MyApp());
 }
-String getAppId() {
-  if (Platform.isIOS) {
-  return 'ca-app-pub-4436272376536757~7379690244';
-} else if (Platform.isAndroid) {
-  return 'ca-app-pub-4436272376536757~7379690244';
-}
-return null;
-}
+// String getAppId() {
+//   if (Platform.isIOS) {
+//   return 'ca-app-pub-4436272376536757~7379690244';
+// } else if (Platform.isAndroid) {
+//   return 'ca-app-pub-4436272376536757~7379690244';
+// }
+// return null;
+// }
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     initPlayer();
-    bannerSize = AdmobBannerSize.BANNER;
+    // bannerSize = AdmobBannerSize.BANNER;
     //bannerSize = AdmobBannerSize.MEDIUM_RECTANGLE;
   }
   void initPlayer() {
@@ -153,10 +153,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             () =>
                             launch('https://en.wikipedia.org/wiki/Gamma_wave')),
                   ),
-                  AdmobBanner(
-                    adUnitId: getBannerAdUnitId(),
-                    adSize: bannerSize,
-                  ),
+                  // AdmobBanner(
+                  //   adUnitId: getBannerAdUnitId(),
+                  //   adSize: bannerSize,
+                  // ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: myButton(
@@ -193,12 +193,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ])
     );
   }
-  String getBannerAdUnitId() {
-    if (Platform.isIOS) {
-      return 'ca-app-pub-4436272376536757/5875036884';
-    } else if (Platform.isAndroid) {
-      return 'ca-app-pub-4436272376536757/5875036884';
-    }
-    return null;
-  }
+  // String getBannerAdUnitId() {
+  //   if (Platform.isIOS) {
+  //     return 'ca-app-pub-4436272376536757/5875036884';
+  //   } else if (Platform.isAndroid) {
+  //     return 'ca-app-pub-4436272376536757/5875036884';
+  //   }
+  //   return null;
+  // }
 }
