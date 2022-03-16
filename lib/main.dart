@@ -70,10 +70,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return ButtonTheme(
       minWidth: 16.0,
       splashColor: Colors.lightGreenAccent,
-      child: RaisedButton       onPressed: onPressed,
-          highlightElevation: 16,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10)),
+      child: ElevatedButton(
+          onPressed: onPressed,
+          // highlightElevation: 16,
+          // shape: RoundedRectangleBorder(
+          //     borderRadius: BorderRadius.circular(10)),
 //            child: Container(
 //            decoration: BoxDecoration(
 //              image: DecorationImage(
